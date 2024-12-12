@@ -64,7 +64,7 @@ namespace FindFile
             {
                 InitValue();
                 BackupLogs();
-                string[] jarFiles = Directory.GetFiles(txtDeployUrl.Text, "*.jar");
+                string[] jarFiles = Directory.GetFiles(txtPath.Text, "*.jar");
 
                 // Sử dụng async method để không blocking UI
                 await Task.Run(() =>
@@ -190,7 +190,7 @@ namespace FindFile
                                 // Hiển thị lỗi
                                 this.Invoke((MethodInvoker)delegate
                                 {
-                                    txtResult2.AppendText($"Exception for {fileNameWithoutExtension}: {ex.Message}" + Environment.NewLine);
+                                    txtResult2.AppendText($"[ERROR] Exception for {fileNameWithoutExtension}: {ex.Message}" + Environment.NewLine);
                                     SetColor($"[ERROR] Exception for {fileNameWithoutExtension}: {ex.Message}");
 
                                     txtResult2.ScrollToCaret();
@@ -206,6 +206,7 @@ namespace FindFile
             {
                 txtResult2.AppendText("[ERROR] " + ex.Message + Environment.NewLine);
                 SetColor("[ERROR]  " + ex.Message);
+                File.AppendAllText(logErrorFilePath, $"[ERROR] - {ex.Message}" + Environment.NewLine);
                 MessageBox.Show("Error", "Deployed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
