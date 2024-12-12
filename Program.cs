@@ -12,7 +12,7 @@ namespace FindFile
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             //Application.Run(new GenLicense());
-            Application.Run(new frmJfrogDeploy());
+            Application.Run(new JfrogDeploy());
             //Application.Run(new hfReadme());
         }
     }

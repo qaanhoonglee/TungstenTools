@@ -2,9 +2,9 @@
 using System.Xml.Linq;
 namespace FindFile
 {
-    public partial class frmJfrogDeploy : Form
+    public partial class JfrogDeploy : Form
     {
-        public frmJfrogDeploy()
+        public JfrogDeploy()
         {
             InitializeComponent();
             

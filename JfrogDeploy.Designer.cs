@@ -1,6 +1,6 @@
 ﻿namespace FindFile
 {
-    partial class frmJfrogDeploy
+    partial class JfrogDeploy
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmJfrogDeploy));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(JfrogDeploy));
             btnDeploy = new Button();
             txtPath = new TextBox();
             label1 = new Label();
@@ -148,16 +148,17 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.BackgroundImage = Properties.Resources.banner;
             pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
             pictureBox1.Dock = DockStyle.Top;
+            pictureBox1.Image = Tools.Properties.Resources.banner;
             pictureBox1.Location = new Point(0, 0);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(868, 78);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 10;
             pictureBox1.TabStop = false;
             // 
-            // frmJfrogDeploy
+            // JfrogDeploy
             // 
             AcceptButton = btnDeploy;
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -177,7 +178,7 @@
             Controls.Add(pictureBox1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Name = "frmJfrogDeploy";
+            Name = "JfrogDeploy";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "JFROG Deploy";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

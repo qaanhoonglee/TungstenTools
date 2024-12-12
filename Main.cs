@@ -10,9 +10,9 @@ using System.Xml.Linq;
 
 namespace FindFile
 {
-    public partial class Form1 : Form
+    public partial class Main : Form
     {
-        public Form1()
+        public Main()
         {
             InitializeComponent();
             //CompareMappings();
@@ -1261,7 +1261,7 @@ namespace FindFile
 
         private void btnJfrogDeploy_Click(object sender, EventArgs e)
         {
-            frmJfrogDeploy frmDeploy = new frmJfrogDeploy();
+            JfrogDeploy frmDeploy = new JfrogDeploy();
             frmDeploy.Show();
         }
     }
