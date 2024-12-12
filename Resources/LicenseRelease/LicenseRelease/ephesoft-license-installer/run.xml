@@ -1,0 +1,17 @@
+
+<project name="Ephesoft License installer" default="license-installer">
+
+	<path id="license-installer.path">
+		<pathelement path="."/>
+		<fileset dir="../libs">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<target name="license-installer">
+		<java classname="com.ephesoft.license.installer.LicenseInstallerMain">
+			<classpath refid="license-installer.path"/>
+		</java>
+	</target>
+</project>
+		

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Do not modify styles or source below this line -->
+<style>
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, em, img, ins, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, d, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {    
+margin: 0;
+padding: 0;
+border: 0;
+font-family: Noto Sans, Segoe UI, Arial, sans-serif;
+font-size: 16px;
+vertical-align: baseline;
+}
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+display: flex;
+flex-direction: column;
+height: 100%;
+min-height: 100vh;
+font-size: 1rem;
+font-weight: 400;
+line-height: 1.7rem;
+margin: 0;
+position:relative;
+z-index:0;
+}
+header{
+    display: flex;
+    border-bottom: 3px solid #eeb111;
+    padding: 20px;
+}
+.main{
+    margin: 20px;
+}
+nav{
+    margin: 20px 0;
+}
+nav p{
+    margin: 5px 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+font-weight: normal;
+color:#00558c;
+display: block;
+margin: 20px 0 8px 0;
+line-height: 1.2;
+}
+
+/* Topic title */
+h1{
+font-size: 1.8rem;
+margin-top: 0;
+}
+
+/* Section title */
+h2{
+color: #00558c;
+font-size: 1.6rem;
+}
+
+/* Definition list title */
+h3{
+color: #212529;
+font-size: 1.4rem;
+}
+h4{
+font-size: 1.1rem;
+}
+h5{
+font-size: 1.1rem;
+color: #212529;
+}
+h6{
+font-size: 1rem;
+}
+p{
+margin-bottom: 2px;
+}
+a{
+color: #00558C;
+text-decoration: none;
+}
+a:hover{
+text-decoration: underline;
+}
+ol,
+ul{
+margin-left: 10px; 
+}
+ol,ul{
+padding: 0 5px 0 25px;
+margin-bottom: 0px;
+}
+ol ol,
+ol ul{
+margin-top: 5px;
+}
+li{
+vertical-align: top;
+margin-bottom: 8px;
+}
+li img{
+vertical-align: top;
+}
+ol{
+    list-style: none;
+    counter-reset: section;
+}
+ol li::before, ol ol > li::before, ul ol li::before {
+  counter-increment: section;
+  content: counter(section) ".";
+  font-weight: 700;
+  float: left;
+  margin-left: -30px; 
+}
+
+ol ol > li::before {
+  content: counter(section, lower-alpha) ".";
+  margin-left: -20px; 
+}
+
+ol li ol li::before{
+  color: #212529;
+}
+ul{
+    list-style: disc;
+}
+ul li::before{
+    counter-increment: none;
+    content: none;
+}
+
+/* Formatting for lists within tables */
+table ol,
+table ul{
+margin-left: 5px; 
+}
+.code{
+    font-family: 'Courier New', Courier, monospace;
+    white-space:pre;
+    border: 1px dashed #ccc;
+    background-color: #eee;
+    padding: 12px;
+    overflow: auto;
+    margin: 10px 0;
+}
+table{
+    display: table;
+    border: solid 0px;
+    border-color: #53565A;
+    border-collapse: collapse;
+    margin: 20px 0;
+    table-layout: fixed;
+}
+thead,tbody{
+    width: 100%;
+}
+table tr,
+table tr td,
+table colgroup thead tr th,
+.table>thead>tr>th,
+td,
+th{
+    border: 1px solid #ddd;
+    border-collapse: collapse;
+    padding: 0.5rem;
+    line-height: 1.7em;
+    text-align: left;
+    vertical-align: middle;
+}
+th{
+    font-weight: 700;
+    background-color: #f4f4f8;
+}
+.comment {
+  background-color: #fffdaf; /* Light yellow background for comments */
+  border-left: 3px solid #ffa500; /* Orange border on the left */
+  padding: 10px;
+  margin: 10px 0;
+}
+
+</style>
+</head>
+<body lang=EN-US link="#00558C" vlink="#00558C" style='word-wrap:break-word'>
+<header>
+    <img width=287 height=58 alt="Tungsten Automation" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGF5ZXIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4NjAuOTQgMTczLjg3Ij4KICA8ZGVmcz4KICAgIDxzdHlsZT4KICAgICAgLmNscy0xIHsKICAgICAgICBmaWxsOiAjMDAyODU0OwogICAgICAgIHN0cm9rZS13aWR0aDogMHB4OwogICAgICB9CiAgICA8L3N0eWxlPgogIDwvZGVmcz4KICA8Zz4KICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0ibTMwOC42MSwzNS4wM2gtMjguODZ2MTAuNTVoMTUuMzR2MTIuNzNjMCwyLjE0LTIuNDcsMi43Mi01LjQ0LDIuNzJoLTI5LjI5Yy0yLjk3LDAtNS41Mi0uNjYtNS41Mi0yLjg5di0zMC4wOWMwLTIuNDcsMS4zMi00LjA0LDUuNTItNC4wNGg0Ny4zNXYtMTAuNDdoLTQ3LjI3Yy0xMS45NSwwLTE5LjA0LDQuMi0xOS4wNCwxNC41MXYzMC4xN2MwLDkuMTUsNy4wOSwxMy4zNiwxOS4wNCwxMy4zNmgyOS4yMWMxMi45NCwwLDE4Ljk2LTIuOTcsMTguOTYtMTMuMjd2LTIzLjI4WiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJtNDYuMDEsNzEuNzFWMjQuMTRoLTI5Ljkzdi0xMC40N2g3Mi43MXYxMC40N2gtMjkuMjd2NDcuNTdoLTEzLjUyWiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJtMTQ5LjU0LDEzLjY3aDEzLjQ0djQ0LjAyYzAsOC4zMy01LjExLDE0LjAyLTE4LjYzLDE0LjAyaC0zMC40OWMtMTMuNTIsMC0xOC42My01LjY5LTE4LjYzLTE0LjAyVjEzLjY3aDEzLjQ0djQ0LjExYzAsMi4zOSwxLjgxLDMuMzgsNS4xOSwzLjM4aDMwLjQ5YzMuMzgsMCw1LjE5LS45OSw1LjE5LTMuMzhWMTMuNjdaIi8+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Im0zMTYuMDksNzEuNzF2LTEwLjU1aDQ4LjY5YzMuNzksMCw1LjI4LS42Niw1LjI4LTMuNDZ2LTguMzNjMC0yLjY0LTEuNTctMy41NC01LjI4LTMuNTRoLTMxLjc5Yy0xMy42LDAtMTguOC01LjY5LTE4LjgtMTQuMXYtMy45NmMwLTguNDEsNS4xOS0xNC4xLDE4LjgtMTQuMWg0Ny4yOXYxMC40N2gtNDcuMjljLTMuNTQsMC01LjM2LjkxLTUuMzYsMy41NHY0LjEyYzAsMi40NywxLjU3LDMuNTUsNS4zNiwzLjU1aDMxLjc5YzEzLjYsMCwxOC44LDUuNjksMTguOCwxNC4xdjguMDhjMCw4LjQxLTUuMTksMTQuMTgtMTguOCwxNC4xOGgtNDguNjlaIi8+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Im00MTYuNjcsNzEuNzFWMjQuMTRoLTI5Ljkzdi0xMC40N2g3Mi43MXYxMC40N2gtMjkuMjd2NDcuNTdoLTEzLjUyWiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJtNDY1Ljk4LDcxLjcxVjEzLjY3aDYzLjM1djEwLjQ3aC00OS45MXYxMS42Mmg0Ny4zNXYxMC41NWgtNDcuMzV2MTQuODRoNDkuOTF2MTAuNTVoLTYzLjM1WiIvPgogICAgPGc+CiAgICAgIDxwb2x5Z29uIGNsYXNzPSJjbHMtMSIgcG9pbnRzPSI1NDcuMjEgMTMuNjcgNTM1Ljc1IDEzLjY3IDUzNS43NSA3MS43MSA1NDcuNDYgNzEuNzEgNTQ3LjQ2IDI5LjQyIDU5NC42NiA3MS43MSA2MDEuMjYgNzEuNzEgNjAxLjI2IDYxLjg0IDU0Ny4yMSAxMy42NyIvPgogICAgICA8cG9seWdvbiBjbGFzcz0iY2xzLTEiIHBvaW50cz0iNjAxLjI2IDUzLjQgNjAxLjI2IDEzLjY3IDU4OS40NyAxMy42NyA1ODkuNDcgNDIuODYgNjAxLjI2IDUzLjQiLz4KICAgIDwvZz4KICAgIDxnPgogICAgICA8cG9seWdvbiBjbGFzcz0iY2xzLTEiIHBvaW50cz0iMTgwLjg3IDEzLjY3IDE2OS40MSAxMy42NyAxNjkuNDEgNzEuNzEgMTgxLjEyIDcxLjcxIDE4MS4xMiAyOS40MiAyMjguMzIgNzEuNzEgMjM0LjkyIDcxLjcxIDIzNC45MiA2MS44NCAxODAuODcgMTMuNjciLz4KICAgICAgPHBvbHlnb24gY2xhc3M9ImNscy0xIiBwb2ludHM9IjIzNC45MiA1My40IDIzNC45MiAxMy42NyAyMjMuMTMgMTMuNjcgMjIzLjEzIDQyLjg2IDIzNC45MiA1My40Ii8+CiAgICA8L2c+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Im0xNzMuMjgsODguNzdoNDQ1LjR2NzEuMDVIMTQwLjM5bDMyLjg5LTcxLjA1Wm0zMzYuMTQsNDQuNjJjMCwxLjM2LjIsMi42Mi41OSwzLjc0LjQxLDEuMTYsMS4wNiwyLjE4LDEuOTYsMy4wMi44OC44MywyLjAzLDEuNDksMy40MSwxLjk0LDEuMzQuNDQsMi45OC42Nyw0Ljg3LjY3aDIwLjkyYzEuODksMCwzLjUyLS4yMyw0Ljg3LS42NywxLjM4LS40NiwyLjUyLTEuMTEsMy40MS0xLjk0Ljg5LS44NCwxLjU1LTEuODYsMS45Ni0zLjAyLjM5LTEuMTIuNTktMi4zOC41OS0zLjc0di0xOC4yYzAtMS4zNi0uMi0yLjYyLS41OS0zLjc0LS40MS0xLjE2LTEuMDYtMi4xOC0xLjk2LTMuMDItLjg4LS44My0yLjAzLTEuNDktMy40MS0xLjk0LTEuMzQtLjQ0LTIuOTgtLjY3LTQuODctLjY3aC0yMC45MmMtMS44OSwwLTMuNTIuMjMtNC44Ny42Ny0xLjM4LjQ2LTIuNTIsMS4xMS0zLjQxLDEuOTQtLjg5Ljg0LTEuNTUsMS44Ni0xLjk2LDMuMDItLjM5LDEuMTItLjU5LDIuMzgtLjU5LDMuNzR2MTguMlptLTEzLjY3LDkuMzhoNy43M3YtMzYuOTVoLTcuNzN2MzYuOTVabTYxLjgyLDBoNi45N3YtMjYuNDRsMzIuNjEsMjYuNDRoNC4xMXYtNS44OGwtNi4wMy01LjEzLTMxLjI5LTI1Ljk0aC02LjM2djM2Ljk1Wm0tOTEuNDItMzB2MzBoNy43M3YtMzBoMTYuMTZ2LTYuOTVoLTQwLjV2Ni45NWgxNi42MVptMTM1LjExLDE5LjE4di0yNi4xM2gtNi45N3YyMC4ybDYuOTcsNS45M1ptLTg0LjEsMS41YzAsMS4xNy4zNywyLjM4LDMuMDgsMi4zOGgyMC45MmMyLjcyLDAsMy4wOC0xLjIsMy4wOC0yLjM4di0xOC4zYzAtMS4xNy0uMzctMi4zOC0zLjA4LTIuMzhoLTIwLjkyYy0yLjcyLDAtMy4wOCwxLjItMy4wOCwyLjM4djE4LjNabS0yOTkuMzItLjA1YzAsMS4zNi4yLDIuNjIuNTksMy43NC40MSwxLjE2LDEuMDYsMi4xOCwxLjk2LDMuMDIuODkuODMsMi4wMywxLjQ5LDMuNDEsMS45NCwxLjM0LjQ0LDIuOTguNjcsNC44Ny42N2gyMC45M2MxLjksMCwzLjQ4LS4yMyw0LjY5LS42OCwxLjI2LS40NywyLjI3LTEuMTQsMy4wMi0yLC43NC0uODYsMS4yNC0xLjg5LDEuNS0zLjA2LjI0LTEuMDkuMzYtMi4zMS4zNi0zLjY0di0yNy41N2gtNy43NHYyNy42MmMwLDEuMTctLjM3LDIuMzgtMy4wOCwyLjM4aC0xOS42N2MtMi43MiwwLTMuMDgtMS4yLTMuMDgtMi4zOHYtMjcuNjJoLTcuNzR2MjcuNTdabTQ2Ljg5LTIwLjYyaDE2LjYxdjMwaDcuNzN2LTMwaDE2LjE2di02Ljk1aC00MC41djYuOTVabTQ1LjUyLDIwLjYyYzAsMS4zNi4yLDIuNjIuNTksMy43NC40MSwxLjE2LDEuMDYsMi4xOCwxLjk2LDMuMDIuODkuODMsMi4wMywxLjQ5LDMuNDEsMS45NCwxLjM0LjQ0LDIuOTguNjcsNC44Ny42N2gyMC45M2MxLjg5LDAsMy41Mi0uMjMsNC44Ny0uNjcsMS4zOC0uNDUsMi41Mi0xLjExLDMuNDEtMS45NC44OS0uODQsMS41NS0xLjg2LDEuOTYtMy4wMi4zOS0xLjEyLjU5LTIuMzguNTktMy43NHYtMTguMmMwLTEuMzYtLjItMi42MS0uNTktMy43NC0uNDEtMS4xNi0xLjA2LTIuMTgtMS45Ni0zLjAyLS44OC0uODMtMi4wMy0xLjQ5LTMuNDEtMS45NC0xLjM0LS40NC0yLjk4LS42Ny00Ljg3LS42N2gtMjAuOTNjLTEuODksMC0zLjUyLjIzLTQuODcuNjctMS4zOC40Ni0yLjUyLDEuMTEtMy40MSwxLjk0LS45Ljg0LTEuNTUsMS44Ni0xLjk2LDMuMDItLjM5LDEuMTItLjU5LDIuMzgtLjU5LDMuNzR2MTguMlptNy43NC4wNWMwLDEuMTcuMzcsMi4zOCwzLjA4LDIuMzhoMjAuOTNjMi43MiwwLDMuMDgtMS4yLDMuMDgtMi4zOHYtMTguM2MwLTEuMTctLjM3LTIuMzgtMy4wOC0yLjM4aC0yMC45M2MtMi43MiwwLTMuMDgsMS4yLTMuMDgsMi4zOHYxOC4zWm00MS4yOCw5LjMyaDcuMjl2LTIyLjU1bDE0LjgxLDIyLjU1aDUuODVsMTQuNzYtMjIuNTl2MjIuNTloNy4yOXYtMzYuOTVoLTYuNDhsLTE4LjI1LDI4LjAyLTE4LjA4LTI3LjYzLS4yNi0uNGgtNi45M3YzNi45NVptNTIuNTMtLjA2aDguN2wxMy40OS0yOC4zMSw3LjQ0LDEyLjY5aC04LjIzbC0yLjk4LDYuNzVoMTUuMDlsNS4xMSw4Ljg3aDkuMmwtMjEuOTctMzYuOTVoLTguNzdsLTE3LjExLDM2Ljk1Wm0tMjI2Ljc2LTM3LjAxbC0xNy4xMSwzNi45NWg4LjdsMTMuNDktMjguMzEsNy40NCwxMi42OWgtOC4yM2wtMi45OCw2Ljc1aDE1LjA5bDUuMTEsOC44N2g5LjJsLTIxLjk3LTM2Ljk1aC04Ljc3WiIvPgogIDwvZz4KICA8Zz4KICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0ibTY0NC4zOCwxMTQuN3YtMjUuMjhoMTkuNXY0LjU1aC0xNC4yN3Y1Ljk2aDkuNXY0LjM3aC05LjV2MTAuNGgtNS4yNFoiLz4KICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0ibTY3OC45OCwxMTUuMWMtMS44OCwwLTMuNjMtLjMzLTUuMjUtLjk5LTEuNjMtLjY2LTMuMDUtMS41OS00LjI2LTIuNzhzLTIuMTctMi41OC0yLjg1LTQuMTVjLS42OS0xLjU4LTEuMDMtMy4yOC0xLjAzLTUuMTFzLjM0LTMuNTMsMS4wMy01LjExYy42OS0xLjU4LDEuNjQtMi45NiwyLjg1LTQuMTVzMi42NC0yLjEyLDQuMjYtMi43OGMxLjYyLS42NiwzLjM4LS45OSw1LjI1LS45OXMzLjU5LjMzLDUuMjIuOTljMS42My42NiwzLjA1LDEuNTksNC4yNiwyLjc4LDEuMjEsMS4xOSwyLjE2LDIuNTgsMi44Myw0LjE1LjY3LDEuNTgsMS4wMSwzLjI4LDEuMDEsNS4xMXMtLjM0LDMuNTMtMS4wMSw1LjExYy0uNjcsMS41OC0xLjYyLDIuOTYtMi44Myw0LjE1LTEuMjIsMS4xOS0yLjY0LDIuMTItNC4yNiwyLjc4LTEuNjIuNjYtMy4zNy45OS01LjIyLjk5Wm0wLTQuOGMxLjEzLDAsMi4xOC0uMjEsMy4xNC0uNjMuOTYtLjQyLDEuODEtMSwyLjUzLTEuNzMuNzItLjczLDEuMjktMS42MSwxLjctMi42Mi40MS0xLjAxLjYxLTIuMDkuNjEtMy4yNXMtLjIxLTIuMy0uNjEtMy4yOWMtLjQxLS45OS0uOTgtMS44NS0xLjctMi41OC0uNzItLjczLTEuNTctMS4zMS0yLjUzLTEuNzMtLjk2LS40Mi0yLS42My0zLjExLS42M3MtMi4yMi4yMS0zLjIuNjNjLS45OC40Mi0xLjgyLDEtMi41NSwxLjczLS43Mi43My0xLjI5LDEuNi0xLjcsMi41OC0uNDEuOTktLjYxLDIuMDYtLjYxLDMuMjFzLjIsMi4zMS42MSwzLjMyYy40MSwxLjAxLjk4LDEuODgsMS43LDIuNjIuNzIuNzMsMS41NywxLjMxLDIuNTUsMS43My45Ny40MiwyLjAzLjYzLDMuMTYuNjNaIi8+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Im02OTYuNjEsMTE0Ljd2LTI1LjI4aDEyLjMyYzEuNzMsMCwzLjI2LjMzLDQuNTcuOTksMS4zMS42NiwyLjMzLDEuNTgsMy4wNywyLjc2LjczLDEuMTgsMS4xLDIuNTQsMS4xLDQuMDhzLS40NSwzLTEuMzQsNC4yNGMtLjg5LDEuMjQtMi4wOCwyLjE2LTMuNTgsMi43Nmw1LjYsMTAuNDRoLTUuODVsLTQuOTUtOS42OGgtNS43MXY5LjY4aC01LjI0Wm01LjI0LTEzLjk4aDYuNjVjMS4xOCwwLDIuMTItLjMxLDIuODQtLjk0LjcxLS42MywxLjA3LTEuNDQsMS4wNy0yLjQ2cy0uMzYtMS44Ny0xLjA3LTIuNDljLS43MS0uNjMtMS42Ni0uOTQtMi44NC0uOTRoLTYuNjV2Ni44M1oiLz4KICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0ibTcyMS44OSwxMTQuN3YtMjUuMjhoNi43NWw2LjksMTMuNjUsNi45NC0xMy42NWg2LjY4djI1LjI4aC00Ljkxdi0xOC42bC04Ljc4LDE2Ljc5LTguNzQtMTYuODd2MTguNjdoLTQuODRaIi8+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Im03NTQuNDcsMTE0Ljd2LTI1LjI4aDE5LjQzdjQuNTVoLTE0LjE5djUuNzhoOS4zNXY0LjM3aC05LjM1djYuMDNoMTQuMzR2NC41NWgtMTkuNThaIi8+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Im03NzguNDksMTE0Ljd2LTI1LjI4aDEyLjMyYzEuNzMsMCwzLjI2LjMzLDQuNTcuOTksMS4zMS42NiwyLjMzLDEuNTgsMy4wNywyLjc2LjczLDEuMTgsMS4xLDIuNTQsMS4xLDQuMDhzLS40NSwzLTEuMzQsNC4yNGMtLjg5LDEuMjQtMi4wOCwyLjE2LTMuNTgsMi43Nmw1LjYsMTAuNDRoLTUuODVsLTQuOTUtOS42OGgtNS43MXY5LjY4aC01LjI0Wm01LjI0LTEzLjk4aDYuNjVjMS4xOCwwLDIuMTItLjMxLDIuODQtLjk0LjcxLS42MywxLjA3LTEuNDQsMS4wNy0yLjQ2cy0uMzYtMS44Ny0xLjA3LTIuNDljLS43MS0uNjMtMS42Ni0uOTQtMi44NC0uOTRoLTYuNjV2Ni44M1oiLz4KICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0ibTgwMy43NywxMTQuN3YtMjUuMjhoNS4yNHYyMC42NmgxMy44M3Y0LjYyaC0xOS4wN1oiLz4KICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0ibTgyOS43MSwxMTQuN3YtOS42OGwtMTAuMzMtMTUuNmg2LjAzbDcuMDgsMTAuOTgsNy4wOC0xMC45OGg1Ljc0bC0xMC4zNywxNS42NHY5LjY0aC01LjI0WiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJtNjQ1LjAxLDE1OS44NXYtMzQuOTloOC42djE1LjI5bDE0LjE0LTE1LjI5aDEwLjRsLTE2LjE5LDE2LjQ0LDE3LjA5LDE4LjU0aC0xMS40bC0xNC4wNC0xNi4wNHYxNi4wNGgtOC42WiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJtNjk4Ljg4LDE2MC40Yy0yLjYzLDAtNS4wOC0uNDYtNy4zNS0xLjM3LTIuMjctLjkyLTQuMjUtMi4yLTUuOTUtMy44NS0xLjctMS42NS0zLjAyLTMuNTYtMy45Ny01Ljc1LS45NS0yLjE4LTEuNDItNC41NC0xLjQyLTcuMDdzLjQ3LTQuODksMS40Mi03LjA3Yy45NS0yLjE4LDIuMjctNC4xLDMuOTctNS43NSwxLjctMS42NSwzLjY4LTIuOTMsNS45NS0zLjg1LDIuMjctLjkyLDQuNzEtMS4zNyw3LjM1LTEuMzdzNS4wOC40Niw3LjM1LDEuMzdjMi4yNy45Miw0LjI1LDIuMiw1Ljk1LDMuODUsMS43LDEuNjUsMy4wMiwzLjU3LDMuOTcsNS43NS45NSwyLjE4LDEuNDIsNC41NCwxLjQyLDcuMDdzLS40Nyw0Ljg5LTEuNDIsNy4wN2MtLjk1LDIuMTgtMi4yNyw0LjEtMy45Nyw1Ljc1LTEuNywxLjY1LTMuNjgsMi45My01Ljk1LDMuODUtMi4yNy45Mi00LjcyLDEuMzctNy4zNSwxLjM3Wm0wLTcuOWMxLjQsMCwyLjctLjI2LDMuOS0uNzcsMS4yLS41MiwyLjI0LTEuMjIsMy4xMi0yLjEyczEuNTgtMS45NywyLjA3LTMuMjJjLjUtMS4yNS43NS0yLjU5Ljc1LTQuMDJzLS4yNS0yLjgyLS43NS00LjA1Yy0uNS0xLjIzLTEuMTktMi4zLTIuMDctMy4ycy0xLjkyLTEuNjEtMy4xMi0yLjEyYy0xLjItLjUyLTIuNS0uNzctMy45LS43N3MtMi43LjI2LTMuOS43N2MtMS4yLjUyLTIuMjQsMS4yMi0zLjEyLDIuMTItLjg4LjktMS41OCwxLjk3LTIuMDcsMy4yLS41LDEuMjMtLjc1LDIuNTgtLjc1LDQuMDVzLjI1LDIuNzcuNzUsNC4wMmMuNSwxLjI1LDEuMTksMi4zMiwyLjA3LDMuMjIuODguOSwxLjkyLDEuNjEsMy4xMiwyLjEyLDEuMi41MiwyLjUuNzcsMy45Ljc3WiIvPgogICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJtNzIyLjEzLDE1OS44NXYtMzQuOTloMjcuNzl2Ny40NWgtMTkuMTl2Ni41NWgxMi43OXY3LjJoLTEyLjc5djEzLjc5aC04LjZaIi8+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Im03NDQuOTcsMTU5Ljg1bDE0LjM0LTM0Ljk5aDkuODVsMTQuMTQsMzQuOTloLTkuM2wtMy4yLTguNDVoLTEzLjY0bC0zLjI1LDguNDVoLTguOTVabTE0Ljc5LTE1LjI5aDguNWwtNC4yLTExLjItNC4zLDExLjJaIi8+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Im03ODQuMiwxNTkuODVsMTMuMjUtMTguMDQtMTIuNjUtMTYuOTRoMTAuMjVsNy41LDEwLjU1LDcuNS0xMC41NWg5Ljg1bC0xMi40NSwxNi45NCwxMy41LDE4LjA0aC0xMC4yNWwtOC4zNS0xMS43LTguMywxMS43aC05Ljg1WiIvPgogIDwvZz4KPC9zdmc+" /> 
+</header>
+<div class="main">
+<!-- Do not modify styles and source above this line -->
+
+<h1>Transact {RELEASE_VERSION} Fix {OOS_ID}</h1>
+<h4>Build Date: {BUILD_DATE}</h4>
+
+<p>&copy; 2024 Tungsten Automation. All rights reserved.<br />Use is subject to license terms.</p>
+<nav>
+    <p><a href="#intro">Introduction</a></p>
+    <p><a href="#resolved">Issues resolved in this fix</a> </p>
+    <p><a href="#applies">Applies to</a></p>
+    <p><a href="#files_included">Files included</a></p>
+    <p><a href="#files_updated">Files and folders updated</a></p>
+    <p><a href="#importantnotes">Important notes</a></p>
+    <p><a href="#install">Install this fix</a></p>
+    <p><a href="#remove">Remove this fix</a></p>
+</nav>
+
+<h2><a name="intro"></a>Introduction</h2>
+<p>Install Transact {RELEASE_VERSION} Fix {OOS_ID} to resolve the issues listed below.</p>
+
+<h2><a name="resolved"></a>Issues resolved in this fix</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Issue</th>
+        <th>Solution</th>
+    </tr>
+    <tr>
+        <td>{BUG_ID}</td>
+        <td>{BUG_NAME}</td>
+        <td>{BUG_SOLUTION}</td>
+    </tr>
+</table>
+
+<h2><a name="applies"></a>Applies to</h2>
+<p>Transact {RELEASE_VERSION}</p>
+
+<h2><a name="files_included"></a>Files included</h2>
+
+<p>This fix includes the following files:</p>
+<table>
+    <tr>
+        <th>File name</th>
+        <th>Version</th>
+    </tr>
+    <tr>
+		<td>deliverables/Transact-{RELEASE_VERSION}.FIX{OOS_ID}_ForLinux.zip</td>
+        <td>N/A</td>        
+    </tr>
+    <tr>
+        <td>PDT-TOOL/ephesoft-generic-installer-1.0-SNAPSHOT.jar</td>
+        <td>N/A</td>
+    </tr>
+    <tr>
+		<td>PDT-TOOL/generic_installer.sh</td>
+        <td>N/A</td>
+    </tr>
+    <tr>
+		<td>PDT-TOOL/generic_uninstaller.sh</td>
+        <td>N/A</td>
+    </tr>
+    <tr>
+		<td>ReadMe-Transact-{RELEASE_VERSION}.FIX{OOS_ID}_ForLinux.htm</td>
+        <td>N/A</td>
+    </tr>
+</table>
+
+<h2><a name="files_updated"></a>Files and folders updated</h2>
+
+<p>The following files and folders are updated during the fix installation:</p>
+<table>
+    <tr>
+        <th>File/Folder Name</th>
+        <th>Version</th>
+    </tr>
+    {JARS_FOR_DROP}
+    {FILE_FILE_FOR_DROP}
+</table>
+
+<h2><a name="importantnotes"></a>Important notes</h2>
+<ul>
+    <li>Before starting the deployment or rollback procedure, read this entire ReadMe file. If you have questions, contact Support for assistance.</li>
+    <li>If the Transact server does not start or perform as expected after the deployment of this fix, follow the steps in the <a href="#remove">Remove this fix</a> section to revert your changes. However, we recommend contacting Support first.</li>
+    <li>As with any Transact system change, we strongly recommend that you deploy this fix to your Test environment and perform thorough testing before deploying the fix to your Production environment.</li>
+</ul>
+
+<h2><a name="install"></a>Install this fix</h2>
+<ol>
+    <li>Stop the Transact server if it is running.</li>
+	<li>Copy the <b>deliverables/Transact-{RELEASE_VERSION}.FIX{OOS_ID}_ForLinux.zip</b> file inside the <b>deliverables</b> folder of the PDT tool.</li>
+    <p>For example, the path looks similar to the following: <b>PDT-TOOL/deliverables</b></p>
+	<p><b>Note:</b> Make sure that only the <b>Transact-{RELEASE_VERSION}.FIX{OOS_ID}_ForLinux.zip</b> file is there and remove all the other files and folders. Otherwise, the PDT tool installs all the fixes located inside the <b>deliverables</b> folder.</p>
+	<li>Run Terminal as Superuser and navigate to the PDT tool location.</li>
+	<li>Run command <b>generic_installer.sh</b> to install the fix.</li>
+    <li>Start the Transact server and perform the test cycle:</li>
+    <ul>
+        <li>Start the Ephesoft server.</li>
+        <p><b>Note:</b> In a clustered environment, we recommend starting nodes only after ALL nodes have been upgraded.</p>
+        <li>Perform verifications as suggested in the <a href="#importantnotes">Important notes</a> section.</li>
+    </ul>
+</ol>
+
+<h2><a name="remove"></a>Remove this fix</h2>
+<ol>
+    <li>Stop the Transact server if it is running.</li>
+	<li>Copy the <b>deliverables/Transact-{RELEASE_VERSION}.FIX{OOS_ID}_ForLinux.zip</b> file inside the <b>deliverables</b> folder of the PDT tool.</li>
+    <p>For example, the path looks similar to the following: <b>PDT-TOOL/deliverables</b></p>
+	<p><b>Note:</b> Make sure that only the <b>Transact-{RELEASE_VERSION}.FIX{OOS_ID}_ForLinux.zip</b> file is there and remove all the other files and folders. Otherwise, the PDT tool uninstalls all the fixes located inside the <b>deliverables</b> folder.</p>
+	<li>Run Terminal as Superuser and navigate to the PDT tool location.</li>
+	<li>Run command <b>generic_uninstaller.sh</b> to uninstall the fix.</li>
+    <li>Start the Transact server.</li>
+</ol>
+
+</div>
+</body>
+</html>

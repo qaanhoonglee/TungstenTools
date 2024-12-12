@@ -1,0 +1,122 @@
+
+<project name="Ephesoft binaries weaver" default="create-ephesoft" basedir="..">
+	
+	<property name="LIBS" value="${basedir}/libs" />
+	<property name="STD_LIBS" value="${LIBS}/stdlibs" />
+	<property name="TEMP" value="${basedir}/temp" />
+	
+	<property name="LICENSE_CORE" value="ephesoft-license-core" />
+	<property name="LICENSE_CLIENT" value="ephesoft-license-client" />
+	<property name="LICENSE_SERVER" value="ephesoft-license-server" />
+	<property name="LICENSE_SECURITY" value="ephesoft-license-security" />
+	<property name="LICENSE_ASPECT" value="ephesoft-license-aspect" />	
+	
+	<property name="META_INF" value="META-INF" />
+	
+	<property name="THIS" value="${basedir}/${LICENSE_ASPECT}" />
+
+	<property file="${THIS}/ant_run.properties"/>
+
+	<path id="license.aspect.class.path">
+		<fileset dir="${LIBS}">
+			<include name="**/*.jar"/>
+			<include name="**/**/*.jar"/>
+		</fileset>
+		<fileset dir="${ephesoft.web.app.path}/WEB-INF/lib">
+			<include name="**/*.jar"/>
+			<exclude name="**/dcma-data-access-${ephesoft.application.version}.jar"/>
+			<exclude name="**/dcma-ml-extraction-${ephesoft.application.version}.jar"/>
+            <exclude name="**/dcma-text-analyzer-${ephesoft.application.version}.jar"/>
+            <exclude name="**/dcma-text-extraction-${ephesoft.application.version}.jar"/>
+			<exclude name="**/dcma-batch-${ephesoft.application.version}.jar"/>
+			<exclude name="**/dcma-workflows-${ephesoft.application.version}.jar"/>
+			<exclude name="**/gxt-admin-${ephesoft.application.version}.jar"/>
+			<exclude name="**/dcma-rest-lookup-${ephesoft.application.version}.jar"/>
+			<exclude name="**/dcma-tabbed-pdf-${ephesoft.application.version}.jar"/>
+		</fileset>
+	</path>
+	<taskdef classpath="${STD_LIBS}/aspectj/aspectjtools-1.6.9.M2.jar" resource="org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties"/>
+			
+	<target name="unzip-dcma-jar">
+		<jar jarfile="${TEMP}/temp-ephesoft.jar">
+		  <zipgroupfileset dir="${ephesoft.web.app.path}/WEB-INF/lib">
+				<include name="**/dcma-*.jar"/>
+				<include name="**/gxt-*-${ephesoft.application.version}.jar"/>
+				<exclude name="**/dcma-workflows-${ephesoft.application.version}.jar"/>
+				<exclude name="**/dcma-data-access-${ephesoft.application.version}.jar"/>
+				<exclude name="**/dcma-batch-${ephesoft.application.version}.jar"/>
+				<exclude name="**/dcma-twain-scanner-${ephesoft.application.version}.jar"/>
+                <exclude name="**/dcma-text-extraction-${ephesoft.application.version}.jar"/>
+				<exclude name="**/dcma-ml-extraction-${ephesoft.application.version}.jar"/>
+                <exclude name="**/dcma-text-analyzer-${ephesoft.application.version}.jar"/>
+				<exclude name="**/gxt-admin-${ephesoft.application.version}.jar"/>
+				<exclude name="**/dcma-rest-lookup-${ephesoft.application.version}.jar"/>
+				<exclude name="**/dcma-tabbed-pdf-${ephesoft.application.version}.jar"/>
+		  </zipgroupfileset>
+		</jar>
+		<sleep seconds="1"/>
+	</target>
+
+	<target name="clean-dcma-jar" depends="unzip-dcma-jar">
+		<jar jarfile="${TEMP}/temp-clean-ephesoft.jar">
+		  <zipfileset src="${TEMP}/temp-ephesoft.jar">
+			<!-- Duplicate Package List included in certain jars by Maven.Please add to the list as more duplicate packages are encountered. -->
+		    <exclude name="**/com/ephesoft/dcma/core/*,**/com/ephesoft/dcma/batch/*"/>
+		  </zipfileset>
+		</jar>
+	</target>
+
+
+	<path id="ephesoft.application.lib.path">
+		<fileset dir="${TEMP}">
+			<include name="**/temp-clean-ephesoft.jar"/>
+		</fileset>
+	</path>
+
+	<target name="weave" depends="clean-dcma-jar">
+		<iajc 
+			aspectpath="${LIBS}/${LICENSE_ASPECT}.jar" 
+			outjar="${TEMP}/ephesoft.jar" 
+			classpathref="license.aspect.class.path">
+			<inpath refid="ephesoft.application.lib.path"/>
+		</iajc>
+	</target>
+	
+	<target name="create-ephesoft" depends="weave">
+		<jar jarfile="${ephesoft.web.app.path}/WEB-INF/lib/ephesoft.jar">
+			<zipfileset src="${TEMP}/ephesoft.jar" includes="**/*"/>
+			<zipfileset src="${ephesoft.web.app.path}/WEB-INF/lib/dcma-workflows-${ephesoft.application.version}.jar" includes="**/*"/>
+            <zipfileset src="${ephesoft.web.app.path}/WEB-INF/lib/dcma-data-access-${ephesoft.application.version}.jar" includes="**/*"/>
+			<zipfileset src="${ephesoft.web.app.path}/WEB-INF/lib/dcma-batch-${ephesoft.application.version}.jar" includes="**/*"/>
+			<zipfileset src="${ephesoft.web.app.path}/WEB-INF/lib/dcma-ml-extraction-${ephesoft.application.version}.jar" includes="**/*"/>
+            <zipfileset src="${ephesoft.web.app.path}/WEB-INF/lib/dcma-text-extraction-${ephesoft.application.version}.jar" includes="**/*"/>
+            <zipfileset src="${ephesoft.web.app.path}/WEB-INF/lib/dcma-text-analyzer-${ephesoft.application.version}.jar" includes="**/*"/>
+			<zipfileset src="${ephesoft.web.app.path}/WEB-INF/lib/gxt-admin-${ephesoft.application.version}.jar" includes="**/*"/>
+			<zipfileset src="${ephesoft.web.app.path}/WEB-INF/lib/dcma-rest-lookup-${ephesoft.application.version}.jar" includes="**/*"/>
+			<zipfileset src="${ephesoft.web.app.path}/WEB-INF/lib/dcma-tabbed-pdf-${ephesoft.application.version}.jar" includes="**/*"/>
+			<zipfileset src="${LIBS}/${LICENSE_CORE}.jar" includes="**/*"/>
+			<zipfileset src="${LIBS}/${LICENSE_CLIENT}.jar" includes="**/*" excludes="**/*.properties"/>
+			<zipfileset src="${LIBS}/${LICENSE_SERVER}.jar" includes="**/*"/>
+			<zipfileset src="${LIBS}/${LICENSE_SECURITY}.jar" includes="**/*"/>
+			<zipfileset src="${LIBS}/${LICENSE_ASPECT}.jar" includes="**/*"/>
+		</jar>
+		
+		<copy todir="${ephesoft.web.app.path}/WEB-INF/classes">
+			<fileset dir="${basedir}/${LICENSE_CLIENT}/">
+				<include name="**/*.properties" />
+			</fileset>
+		</copy>
+		
+		<delete>
+			<fileset dir="${ephesoft.web.app.path}/WEB-INF/lib">
+				<include name="**/dcma-*.jar"/>
+				<include name="**/gxt-*-${ephesoft.application.version}.jar"/>
+				<exclude name="**/dcma-twain-scanner-${ephesoft.application.version}.jar"/>
+			</fileset>
+			<fileset dir="${TEMP}">
+				<exclude name="**/ephesoft.jar"/>
+			</fileset>			
+		</delete>
+	</target>
+</project>
+		

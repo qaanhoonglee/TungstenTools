@@ -1,0 +1,17 @@
+
+<project name="Ephesoft License generator" default="license-generator">
+
+	<path id="license-generator.path">
+		<pathelement path="."/>
+		<fileset dir="../libs">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<target name="license-generator">
+		<java classname="com.ephesoft.license.generator.LicenseGeneratorMain">
+			<classpath refid="license-generator.path"/>
+		</java>
+	</target>
+</project>
+		
